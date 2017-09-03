@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <group android:checkableBehavior="single">
+    <item
+        android:id="@+id/nav_welcome"
+        android:title="Welcome"/>
+  </group>
+
+  <item android:title="View Animation">
+    <menu>
+      <item
+          android:id="@+id/nav_share"
+          android:icon="@drawable/ic_menu_share"
+          android:title="Share"/>
+      <item
+          android:id="@+id/nav_send"
+          android:icon="@drawable/ic_menu_send"
+          android:title="Send"/>
+
+      <item
+          android:id="@+id/nav_view_animation"
+          android:icon="@drawable/ic_menu_camera"
+          android:title="View Animation"/>
+      <item
+          android:id="@+id/nav_property_animation"
+          android:icon="@drawable/ic_menu_gallery"
+          android:title="Property Animation"/>
+      <item
+          android:id="@+id/nav_physic_animation"
+          android:icon="@drawable/ic_menu_slideshow"
+          android:title="Physic-based Animation"/>
+    </menu>
+  </item>
+
+  <item android:title="Physics-based Animations">
+    <menu>
+      <item
+          android:id="@+id/nav_spring"
+          android:icon="@drawable/ic_menu_share"
+          android:title="Spring"/>
+    </menu>
+
+  </item>
+
+</menu>
