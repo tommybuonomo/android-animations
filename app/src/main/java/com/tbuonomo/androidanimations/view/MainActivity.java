@@ -1,4 +1,4 @@
-package com.tbuonomo.androidanimations;
+package com.tbuonomo.androidanimations.view;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -13,8 +13,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import com.tbuonomo.androidanimations.view.SpringExampleFragment;
-import com.tbuonomo.androidanimations.view.WelcomeFragment;
+import com.tbuonomo.androidanimations.R;
+import com.tbuonomo.androidanimations.view.fragment.SpringExampleFragment;
+import com.tbuonomo.androidanimations.view.fragment.WelcomeFragment;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {

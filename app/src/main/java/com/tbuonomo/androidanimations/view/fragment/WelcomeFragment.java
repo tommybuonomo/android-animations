@@ -1,4 +1,4 @@
-package com.tbuonomo.androidanimations.view;
+package com.tbuonomo.androidanimations.view.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

@@ -7,4 +7,6 @@
   <string name="action_settings">Settings</string>
   <string name="welcome">Welcome</string>
   <string name="drag_me">Drag me !</string>
+  <string name="damping_ratio">Damping ratio\n%s</string>
+  <string name="stiffness">Stiffness\n%s</string>
 </resources>
