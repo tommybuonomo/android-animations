@@ -20,9 +20,8 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-  private FragmentManager fragmentManager;
-
   @BindView(R.id.toolbar) Toolbar toolbar;
+  private FragmentManager fragmentManager;
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -93,8 +92,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
       case R.id.nav_view_animation:
         break;
       case R.id.nav_property_animation:
-        break;
-      case R.id.nav_physic_animation:
         break;
       case R.id.nav_share:
         break;

@@ -1,5 +1,5 @@
 <resources>
-  <string name="app_name">AndroidAnimations</string>
+  <string name="app_name">Android Animations</string>
 
   <string name="navigation_drawer_open">Open navigation drawer</string>
   <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -9,4 +9,9 @@
   <string name="drag_me">Drag me !</string>
   <string name="damping_ratio">Damping ratio\n%s</string>
   <string name="stiffness">Stiffness\n%s</string>
+  <string name="interpolators">Interpolators</string>
+  <string name="property_animations">Property Animations</string>
+  <string name="physics_based_animations">Physics-based Animations</string>
+  <string name="linear_interpolator">Linear Interpolator</string>
+  <string name="accelerate_interpolator">Accelerate Interpolator</string>
 </resources>

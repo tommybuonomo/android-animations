@@ -22,23 +22,26 @@
           android:id="@+id/nav_view_animation"
           android:icon="@drawable/ic_menu_camera"
           android:title="View Animation"/>
-      <item
-          android:id="@+id/nav_property_animation"
-          android:icon="@drawable/ic_menu_gallery"
-          android:title="Property Animation"/>
-      <item
-          android:id="@+id/nav_physic_animation"
-          android:icon="@drawable/ic_menu_slideshow"
-          android:title="Physic-based Animation"/>
     </menu>
   </item>
 
-  <item android:title="Physics-based Animations">
+  <item android:title="@string/property_animations">
+    <menu>
+      <item
+          android:id="@+id/nav_interpolator"
+          android:icon="@drawable/ic_menu_share"
+          android:title="@string/interpolators"/>
+
+    </menu>
+
+  </item>
+
+  <item android:title="@string/physics_based_animations">
     <menu>
       <item
           android:id="@+id/nav_spring"
           android:icon="@drawable/ic_menu_share"
-          android:title="Spring"/>
+          android:title="Spring Animation"/>
     </menu>
 
   </item>
