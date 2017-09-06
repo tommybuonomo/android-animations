@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+
+  <android.support.v7.widget.RecyclerView
+      android:id="@+id/fling_recycler_view"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_centerInParent="true"
+      >
+  </android.support.v7.widget.RecyclerView>
+
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_alignParentBottom="true"
+      android:orientation="vertical"
+      android:padding="16dp"
+      >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+      <TextView
+          android:id="@+id/fling_friction_text"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:gravity="center"
+          android:text="@string/damping_ratio"
+          android:textSize="14sp"
+          style="@style/TextViewThin"
+          />
+
+      <SeekBar
+          android:id="@+id/fling_friction_seekbar"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+
+          />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:visibility="gone"
+        >
+      <TextView
+          android:id="@+id/stiffness_text"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:gravity="center"
+          android:text="@string/stiffness"
+          android:textSize="14sp"
+          style="@style/TextViewThin"
+          />
+
+      <SeekBar
+          android:id="@+id/stiffness_seekbar"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          />
+    </LinearLayout>
+  </LinearLayout>
+
+</RelativeLayout>

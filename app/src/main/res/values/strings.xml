@@ -9,9 +9,22 @@
   <string name="drag_me">Drag me !</string>
   <string name="damping_ratio">Damping ratio\n%s</string>
   <string name="stiffness">Stiffness\n%s</string>
+  <string name="friction">Friction\n%s</string>
   <string name="interpolators">Interpolators</string>
   <string name="property_animations">Property Animations</string>
   <string name="physics_based_animations">Physics-based Animations</string>
   <string name="linear_interpolator">Linear Interpolator</string>
   <string name="accelerate_interpolator">Accelerate Interpolator</string>
+  <string name="decelerate_interpolator">Decelerate Interpolator</string>
+  <string name="accelerate_decelerate_interpolator">Accelerate Decelerate Interpolator</string>
+  <string name="anticipate_interpolator">Anticipate Interpolator</string>
+  <string name="anticipate_overshoot_interpolator">Anticipate Overshoot Interpolator</string>
+  <string name="overshoot_interpolator">Overshoot Interpolator</string>
+  <string name="bounce_interpolator">Bounce Interpolator</string>
+  <string name="fast_out_linear_in_interpolator">Fast Out Linear In Interpoloator</string>
+  <string name="fast_out_slow_in_interpolator">Fast Out Slow In Interpolator</string>
+  <string name="linear_out_slow_in_interpolator">Linear Out Slow In Interpolator</string>
+  <string name="cycle_interpolator">Cycle Interpolator</string>
+  <string name="fling_list_animation">Fling List Animation</string>
+  <string name="spring_animation">Spring Animation</string>
 </resources>

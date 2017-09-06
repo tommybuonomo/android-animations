@@ -21,7 +21,7 @@ import com.tbuonomo.androidanimations.view.util.DragAndDropViewHelper;
  * Created by tommy on 04/09/17.
  */
 
-public class SpringExampleFragment extends Fragment implements DragAndDropViewHelper.DragAndDropListener {
+public class SpringDragFragment extends Fragment implements DragAndDropViewHelper.DragAndDropListener {
   public static final float MIN_DAMPING = 0.0f;
   public static final float MAX_DAMPING = 1.0f;
   private static final float MIN_STIFFNESS = 0.1f;
@@ -37,7 +37,7 @@ public class SpringExampleFragment extends Fragment implements DragAndDropViewHe
   private SpringAnimation springAnimationY;
 
   @Nullable @Override public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-    View rootView = inflater.inflate(R.layout.spring_fragment, container, false);
+    View rootView = inflater.inflate(R.layout.fragment_spring_drag, container, false);
     ButterKnife.bind(this, rootView);
     return rootView;
   }

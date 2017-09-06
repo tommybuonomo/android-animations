@@ -3,6 +3,7 @@ package com.tbuonomo.androidanimations.view;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -14,7 +15,9 @@ import android.view.MenuItem;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.tbuonomo.androidanimations.R;
-import com.tbuonomo.androidanimations.view.fragment.SpringExampleFragment;
+import com.tbuonomo.androidanimations.view.fragment.FlingListFragment;
+import com.tbuonomo.androidanimations.view.fragment.InterpolatorsFragment;
+import com.tbuonomo.androidanimations.view.fragment.SpringDragFragment;
 import com.tbuonomo.androidanimations.view.fragment.WelcomeFragment;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
@@ -80,8 +83,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     return super.onOptionsItemSelected(item);
   }
 
-  private void replaceFragment(SpringExampleFragment springExampleFragment) {
-    fragmentManager.beginTransaction().replace(R.id.fragment_container, springExampleFragment).commit();
+  private void replaceFragment(Fragment fragment) {
+    fragmentManager.beginTransaction().replace(R.id.fragment_container, fragment).commit();
   }
 
   @SuppressWarnings("StatementWithEmptyBody") @Override public boolean onNavigationItemSelected(MenuItem item) {
@@ -91,14 +94,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     switch (id) {
       case R.id.nav_view_animation:
         break;
-      case R.id.nav_property_animation:
-        break;
-      case R.id.nav_share:
-        break;
-      case R.id.nav_send:
+      case R.id.nav_interpolator:
+        replaceFragment(new InterpolatorsFragment());
         break;
       case R.id.nav_spring:
-        replaceFragment(new SpringExampleFragment());
+        replaceFragment(new SpringDragFragment());
+        break;
+      case R.id.nav_fling:
+        replaceFragment(new FlingListFragment());
         break;
     }
 
