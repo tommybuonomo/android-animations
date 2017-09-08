@@ -3,21 +3,24 @@ package com.tbuonomo.androidanimations.view.fragment;
 import android.os.Bundle;
 import android.support.animation.DynamicAnimation;
 import android.support.animation.FlingAnimation;
-import android.support.animation.FloatValueHolder;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.HorizontalScrollView;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.tbuonomo.androidanimations.R;
-import com.tbuonomo.androidanimations.view.adapter.SocialIconsAdapter;
+import com.tbuonomo.androidanimations.view.adapter.item.SocialItem;
 import com.tbuonomo.androidanimations.view.util.DrawableUtils;
 
 /**
@@ -28,7 +31,8 @@ public class FlingListFragment extends Fragment {
 
   private static final float MIN_FRICTION = 1.0f;
   private static final float MAX_FRICTION = 4.0f;
-  @BindView(R.id.fling_recycler_view) RecyclerView recyclerView;
+  @BindView(R.id.fling_recycler_view) LinearLayout linearLayout;
+  @BindView(R.id.fling_scroll_view) HorizontalScrollView scrollView;
   @BindView(R.id.fling_friction_text) TextView frictionTextView;
   @BindView(R.id.fling_friction_seekbar) SeekBar frictionSeekBar;
   private float flingFriction = MIN_FRICTION;
@@ -40,35 +44,29 @@ public class FlingListFragment extends Fragment {
   }
 
   @Override public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-    LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-    recyclerView.setLayoutManager(layoutManager);
+    for (SocialItem socialItem : DrawableUtils.getAllSocialItems(getContext())) {
+      View v = LayoutInflater.from(getContext()).inflate(R.layout.item_social_icon, linearLayout, false);
+      ImageView image = v.findViewById(R.id.item_social_image);
+      image.setImageDrawable(ContextCompat.getDrawable(getContext(), socialItem.getDrawableResId()));
+      linearLayout.addView(v);
+    }
 
-    SocialIconsAdapter adapter = new SocialIconsAdapter(DrawableUtils.getAllSocialItems(getContext()));
-    recyclerView.setAdapter(adapter);
+    GestureDetector.OnGestureListener gestureListener = new GestureDetector.SimpleOnGestureListener() {
+      @Override public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+        Log.i(FlingListFragment.class.getSimpleName(), "onFling: " + velocityX);
 
-    //GestureDetector.OnGestureListener gestureListener = new GestureDetector.SimpleOnGestureListener() {
-    //  @Override public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-    //
-    //  }
-    //};
-
-    //GestureDetector gestureDetector = new GestureDetector(getContext(), gestureListener);
-
-    //recyclerView.setOnTouchListener((v, event) -> gestureDetector.onTouchEvent(event));
-
-    recyclerView.setOnFlingListener(new RecyclerView.OnFlingListener() {
-      @Override public boolean onFling(int velocityX, int velocityY) {
-        FloatValueHolder floatValueHolder = new FloatValueHolder();
-        FlingAnimation flingAnimation = new FlingAnimation(floatValueHolder);
-        flingAnimation.addUpdateListener(new DynamicAnimation.OnAnimationUpdateListener() {
-          @Override public void onAnimationUpdate(DynamicAnimation animation, float value, float velocity) {
-            Log.i(FlingListFragment.class.getSimpleName(), "onAnimationUpdate: " + value);
-            //layoutManager.scrollHorizontallyBy();
-          }
-        });
+        FlingAnimation flingAnimation = new FlingAnimation(scrollView, DynamicAnimation.SCROLL_X);
         flingAnimation.setStartVelocity(-velocityX).setMinValue(0).setMaxValue(100000).setFriction(flingFriction).start();
-        Log.i(FlingListFragment.class.getSimpleName(), "onFling: " + recyclerView.getScrollX());
+
         return true;
+      }
+    };
+
+    GestureDetector gestureDetector = new GestureDetector(getContext(), gestureListener);
+
+    scrollView.setOnTouchListener(new View.OnTouchListener() {
+      @Override public boolean onTouch(View view, MotionEvent motionEvent) {
+        return gestureDetector.onTouchEvent(motionEvent);
       }
     });
 
