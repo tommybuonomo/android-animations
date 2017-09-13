@@ -45,8 +45,7 @@ public class SpringDragFragment extends Fragment implements DragAndDropViewHelpe
   @Override public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
     new DragAndDropViewHelper().setOnDragAndDropListener(this).applyOnView(cardView);
 
-    springForce = new SpringForce();
-    springForce.setFinalPosition(0f);
+    springForce = new SpringForce(0f);
 
     refreshSeekBars();
 
