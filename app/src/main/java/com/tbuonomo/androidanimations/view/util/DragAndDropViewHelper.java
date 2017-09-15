@@ -23,6 +23,12 @@ public class DragAndDropViewHelper {
     view.setOnTouchListener(new DragAndDropTouchListener());
   }
 
+  public interface DragAndDropListener {
+    void onDragEnd();
+
+    void onDragStart();
+  }
+
   private class DragAndDropTouchListener implements View.OnTouchListener {
     private float lastX;
     private float lastY;
@@ -38,7 +44,9 @@ public class DragAndDropViewHelper {
           translationY = v.getTranslationY();
           lastX = x;
           lastY = y;
-          dragAndDropListener.onDragStart();
+          if (dragAndDropListener != null) {
+            dragAndDropListener.onDragStart();
+          }
           break;
 
         case MotionEvent.ACTION_MOVE:
@@ -66,10 +74,5 @@ public class DragAndDropViewHelper {
       }
       return true;
     }
-  }
-
-  public interface DragAndDropListener {
-    void onDragEnd();
-    void onDragStart();
   }
 }
