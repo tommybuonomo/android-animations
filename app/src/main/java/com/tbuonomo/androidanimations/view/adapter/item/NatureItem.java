@@ -7,7 +7,7 @@ import android.support.annotation.DrawableRes;
  */
 
 public class NatureItem {
-  @DrawableRes int drawableResId;
+  @DrawableRes private int drawableResId;
 
   public NatureItem(int drawableResId) {
     this.drawableResId = drawableResId;

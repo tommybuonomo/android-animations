@@ -1,4 +1,4 @@
-package com.tbuonomo.androidanimations.view;
+package com.tbuonomo.androidanimations.view.activity;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -6,23 +6,27 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.ViewCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.transition.TransitionInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.tbuonomo.androidanimations.R;
 import com.tbuonomo.androidanimations.view.fragment.FlingListFragment;
 import com.tbuonomo.androidanimations.view.fragment.InterpolatorsFragment;
-import com.tbuonomo.androidanimations.view.fragment.SharedElementFragment;
+import com.tbuonomo.androidanimations.view.fragment.SharedElementDetailFragment;
+import com.tbuonomo.androidanimations.view.fragment.SharedElementListFragment;
 import com.tbuonomo.androidanimations.view.fragment.SpringDragFragment;
 import com.tbuonomo.androidanimations.view.fragment.WelcomeFragment;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, FragmentNavigation {
 
   @BindView(R.id.toolbar) Toolbar toolbar;
   private FragmentManager fragmentManager;
@@ -102,7 +106,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         replaceFragment(new SpringDragFragment());
         break;
       case R.id.nav_shared_element:
-        replaceFragment(new SharedElementFragment());
+        replaceFragment(new SharedElementListFragment());
         break;
       case R.id.nav_fling:
         replaceFragment(new FlingListFragment());
@@ -116,5 +120,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
   @Override protected void attachBaseContext(Context newBase) {
     super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+  }
+
+  @Override public void navigateToNatureDetailFragment(int natureResId, View sharedElement) {
+    SharedElementDetailFragment fragment = SharedElementDetailFragment.newInstance(natureResId);
+    fragment.setEnterTransition(TransitionInflater.from(this).inflateTransition(android.R.transition.fade));
+    fragment.setExitTransition(TransitionInflater.from(this).inflateTransition(android.R.transition.fade));
+    fragmentManager.beginTransaction()
+        .addSharedElement(sharedElement, ViewCompat.getTransitionName(sharedElement))
+        .addToBackStack(SharedElementDetailFragment.class.getSimpleName())
+        .replace(R.id.fragment_container, fragment)
+        .commit();
   }
 }

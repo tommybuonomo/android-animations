@@ -20,6 +20,7 @@ import java.util.List;
 public class NatureItemsAdapter extends RecyclerView.Adapter<NatureItemsAdapter.ViewHolder> {
   private List<NatureItem> natureItems;
   private Context context;
+  private OnItemClickListener onItemClickListener;
 
   public NatureItemsAdapter(List<NatureItem> natureItems) {
     this.natureItems = natureItems;
@@ -31,20 +32,36 @@ public class NatureItemsAdapter extends RecyclerView.Adapter<NatureItemsAdapter.
   }
 
   @Override public void onBindViewHolder(ViewHolder holder, int position) {
-    Glide.with(context).load(natureItems.get(position).getDrawableResId()).into(holder.natureImage);
-    //holder.natureImage.setImageDrawable(ContextCompat.getDrawable(context, natureItems.get(position).getDrawableResId()));
+    int drawableResId = natureItems.get(position).getDrawableResId();
+    Glide.with(context).load(drawableResId).into(holder.natureImage);
+
+    holder.natureImage.setTransitionName(String.valueOf(drawableResId));
+
+    holder.itemView.setOnClickListener(view -> {
+      if (onItemClickListener != null) {
+        onItemClickListener.onItemClick(natureItems.get(position), holder.natureImage);
+      }
+    });
   }
 
   @Override public int getItemCount() {
     return natureItems.size();
   }
 
+  public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+    this.onItemClickListener = onItemClickListener;
+  }
+
   public class ViewHolder extends RecyclerView.ViewHolder {
-    @BindView(R.id.item_nature_image) ImageView natureImage;
+    @BindView(R.id.item_nature_image) public ImageView natureImage;
 
     public ViewHolder(View itemView) {
       super(itemView);
       ButterKnife.bind(this, itemView);
     }
+  }
+
+  public interface OnItemClickListener {
+    void onItemClick(NatureItem natureItem, View natureView);
   }
 }
