@@ -13,6 +13,7 @@
   <string name="interpolators">Interpolators</string>
   <string name="property_animations">Property Animations</string>
   <string name="physics_based_animations">Physics-based Animations</string>
+  <string name="transitions_animations">Transition Animations</string>
   <string name="linear_interpolator">Linear Interpolator</string>
   <string name="accelerate_interpolator">Accelerate Interpolator</string>
   <string name="decelerate_interpolator">Decelerate Interpolator</string>
@@ -26,5 +27,6 @@
   <string name="linear_out_slow_in_interpolator">Linear Out Slow In Interpolator</string>
   <string name="cycle_interpolator">Cycle Interpolator</string>
   <string name="fling_list_animation">Fling List Animation</string>
+  <string name="shared_element_animation">Shared Element Animation</string>
   <string name="spring_animation">Spring Animation</string>
 </resources>

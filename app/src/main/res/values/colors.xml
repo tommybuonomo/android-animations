@@ -3,4 +3,32 @@
   <color name="colorPrimary">#00838F</color>
   <color name="colorPrimaryDark">#006064</color>
   <color name="colorAccent">#18FFFF</color>
+
+  <array name="welcome_colors">
+    <item>@color/md_amber_800</item>
+    <item>@color/md_deep_orange_200</item>
+    <item>@color/md_deep_orange_500</item>
+    <item>@color/md_pink_500</item>
+    <item>@color/md_pink_200</item>
+    <item>@color/md_red_A400</item>
+    <item>@color/md_purple_500</item>
+    <item>@color/md_deep_purple_A200</item>
+    <item>@color/md_indigo_A400</item>
+    <item>@color/md_blue_600</item>
+    <item>@color/md_light_blue_300</item>
+    <item>@color/md_cyan_600</item>
+    <item>@color/md_green_600</item>
+    <item>@color/md_green_A400</item>
+    <item>@color/md_teal_A700</item>
+    <item>@color/md_light_green_600</item>
+    <item>@color/md_lime_A200</item>
+    <item>@color/md_lime_700</item>
+    <item>@color/md_yellow_900</item>
+    <item>@color/md_yellow_A400</item>
+    <item>@color/md_yellow_600</item>
+    <item>@color/md_amber_800</item>
+    <item>@color/md_orange_900</item>
+    <item>@color/md_deep_orange_A700</item>
+
+  </array>
 </resources>

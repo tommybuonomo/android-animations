@@ -17,6 +17,10 @@
     <item name="fontPath">fonts/Roboto-Thin.ttf</item>
   </style>
 
+  <style name="TextViewWelcome" parent="android:TextAppearance">
+    <item name="fontPath">fonts/Myfride_Regular.otf</item>
+  </style>
+
   <style name="AppTheme.NoActionBar">
     <item name="windowActionBar">false</item>
     <item name="windowNoTitle">true</item>

@@ -41,4 +41,14 @@
 
   </item>
 
+
+  <item android:title="@string/transitions_animations">
+    <menu>
+      <item
+          android:id="@+id/nav_shared_element"
+          android:icon="@drawable/ic_menu_share"
+          android:title="@string/shared_element_animation"/>
+    </menu>
+  </item>
+
 </menu>

@@ -28,8 +28,7 @@ android {
 apply plugin: 'me.tatarka.retrolambda'
 
 dependencies {
-  compile fileTree(dir: 'libs', include: ['*.jar'])
-  androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+  compile fileTree(dir: 'libs', include: ['*.jar']) - androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
     exclude group: 'com.android.support', module: 'support-annotations'
   })
   compile 'com.android.support:appcompat-v7:26.0.1'
@@ -41,7 +40,12 @@ dependencies {
   compile 'uk.co.chrisjenx:calligraphy:2.3.0'
   compile 'com.tbuonomo.andrui:materialsquareloading:1.0.1'
 
+  compile 'com.github.bumptech.glide:glide:4.1.1'
+  annotationProcessor 'com.github.bumptech.glide:compiler:4.1.1'
 
+  compile 'com.willowtreeapps.spruce:spruce-android:1.0.1'
+
+  compile 'javax.vecmath:vecmath:1.5.2'
 
   testCompile 'junit:junit:4.12'
 

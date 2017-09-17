@@ -2,6 +2,7 @@ package com.tbuonomo.androidanimations.view.util;
 
 import android.content.Context;
 import android.content.res.Resources;
+import com.tbuonomo.androidanimations.view.adapter.item.NatureItem;
 import com.tbuonomo.androidanimations.view.adapter.item.SocialItem;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,5 +24,15 @@ public class DrawableUtils {
       socialItems.add(new SocialItem(resourceId));
     }
     return socialItems;
+  }
+
+  public static List<NatureItem> getAllNatureItems(Context context) {
+    List<NatureItem> natureItems = new ArrayList<>();
+    Resources resources = context.getResources();
+    for (int i = 0; i < 21; i++) {
+      final int resourceId = resources.getIdentifier(String.format(Locale.getDefault(), "nature_%03d", i), "drawable", context.getPackageName());
+      natureItems.add(new NatureItem(resourceId));
+    }
+    return natureItems;
   }
 }

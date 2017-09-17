@@ -17,6 +17,7 @@ import butterknife.ButterKnife;
 import com.tbuonomo.androidanimations.R;
 import com.tbuonomo.androidanimations.view.fragment.FlingListFragment;
 import com.tbuonomo.androidanimations.view.fragment.InterpolatorsFragment;
+import com.tbuonomo.androidanimations.view.fragment.SharedElementFragment;
 import com.tbuonomo.androidanimations.view.fragment.SpringDragFragment;
 import com.tbuonomo.androidanimations.view.fragment.WelcomeFragment;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
@@ -99,6 +100,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         break;
       case R.id.nav_spring:
         replaceFragment(new SpringDragFragment());
+        break;
+      case R.id.nav_shared_element:
+        replaceFragment(new SharedElementFragment());
         break;
       case R.id.nav_fling:
         replaceFragment(new FlingListFragment());
