@@ -16,6 +16,7 @@ import android.view.animation.OvershootInterpolator;
 import android.widget.FrameLayout;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import com.annimon.stream.Stream;
 import com.tbuonomo.androidanimations.R;
 import com.tbuonomo.androidanimations.view.fragment.util.WelcomeItemWrapper;
 import com.tbuonomo.androidanimations.view.util.DimenUtils;
@@ -76,7 +77,7 @@ public class WelcomeFragment extends Fragment {
         firstAnimationFinished = true;
         WelcomeItemWrapper welcomeItem = new WelcomeItemWrapper(welcomeCardView, 0.5f);
         welcomeItems.add(welcomeItem);
-        welcomeItems.forEach(WelcomeItemWrapper::resetFinalPosition);
+        Stream.of(welcomeItems).forEach(WelcomeItemWrapper::resetFinalPosition);
       }
     });
 
@@ -144,13 +145,11 @@ public class WelcomeFragment extends Fragment {
           return true;
 
         case MotionEvent.ACTION_MOVE:
-          for (WelcomeItemWrapper welcomeItemWrapper : welcomeItems) {
-            welcomeItemWrapper.updateFinalPosition(x, y);
-          }
+          Stream.of(welcomeItems).forEach(welcomeItemWrapper -> welcomeItemWrapper.updateFinalPosition(x, y));
           return true;
 
         case MotionEvent.ACTION_UP:
-          welcomeItems.forEach(WelcomeItemWrapper::resetFinalPosition);
+          Stream.of(welcomeItems).forEach(WelcomeItemWrapper::resetFinalPosition);
           break;
       }
       return false;

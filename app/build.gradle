@@ -45,6 +45,8 @@ dependencies {
 
   compile 'com.willowtreeapps.spruce:spruce-android:1.0.1'
 
+  compile 'com.annimon:stream:1.1.8'
+
   compile 'javax.vecmath:vecmath:1.5.2'
 
   testCompile 'junit:junit:4.12'
