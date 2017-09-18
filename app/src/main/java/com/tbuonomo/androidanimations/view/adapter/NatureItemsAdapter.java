@@ -33,10 +33,8 @@ public class NatureItemsAdapter extends RecyclerView.Adapter<NatureItemsAdapter.
 
   @Override public void onBindViewHolder(ViewHolder holder, int position) {
     int drawableResId = natureItems.get(position).getDrawableResId();
-    Glide.with(context).load(drawableResId).into(holder.natureImage);
-
     holder.natureImage.setTransitionName(String.valueOf(drawableResId));
-
+    Glide.with(context).load(drawableResId).into(holder.natureImage);
     holder.itemView.setOnClickListener(view -> {
       if (onItemClickListener != null) {
         onItemClickListener.onItemClick(natureItems.get(position), holder.natureImage);
