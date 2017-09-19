@@ -2,6 +2,7 @@ package com.tbuonomo.androidanimations.view.fragment;
 
 import android.animation.ObjectAnimator;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
@@ -31,6 +32,12 @@ public class SharedElementListFragment extends Fragment implements NatureItemsAd
   @BindView(R.id.shared_element_recycler_view) RecyclerView recyclerView;
   private boolean startAnimated;
   private FragmentNavigation fragmentNavigation;
+  private boolean recyclerViewLoaded;
+
+  @Override public void onCreate(@Nullable Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    postponeEnterTransition();
+  }
 
   @Nullable @Override public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
     View rootView = inflater.inflate(R.layout.fragment_shared_element, container, false);
@@ -42,18 +49,31 @@ public class SharedElementListFragment extends Fragment implements NatureItemsAd
   @Override public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
     NatureItemsAdapter adapter = new NatureItemsAdapter(DrawableUtils.getAllNatureItems(getContext()));
     adapter.setOnItemClickListener(this);
-
     recyclerView.setHasFixedSize(true);
 
     LinearLayoutManager layoutManager = new GridLayoutManager(getContext(), 2) {
-      //@Override public void onLayoutChildren(RecyclerView.Recycler recycler, RecyclerView.State state) {
-      //  super.onLayoutChildren(recycler, state);
-      //  if (!startAnimated) {
-      //    initSpruce();
-      //    startAnimated = true;
-      //  }
-      //}
+      @Override public void onLayoutChildren(RecyclerView.Recycler recycler, RecyclerView.State state) {
+        super.onLayoutChildren(recycler, state);
+        if (!startAnimated) {
+          initSpruce();
+          startAnimated = true;
+        }
+      }
     };
+
+    new Handler().postDelayed(new Runnable() {
+      @Override public void run() {
+        startPostponedEnterTransition();
+      }
+    }, 2000);
+
+    //recyclerView.getViewTreeObserver().addOnGlobalLayoutListener(() -> {
+    //  if (!recyclerViewLoaded) {
+    //    startPostponedEnterTransition();
+    //    recyclerViewLoaded = true;
+    //  }
+    //});
+
     recyclerView.setLayoutManager(layoutManager);
     recyclerView.setAdapter(adapter);
   }
