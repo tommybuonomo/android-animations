@@ -1,12 +1,9 @@
 package com.tbuonomo.androidanimations.view.fragment;
 
 import android.animation.ObjectAnimator;
-import android.content.Context;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.SharedElementCallback;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -24,8 +21,6 @@ import com.tbuonomo.androidanimations.view.util.DimenUtils;
 import com.tbuonomo.androidanimations.view.util.DrawableUtils;
 import com.willowtreeapps.spruce.Spruce;
 import com.willowtreeapps.spruce.sort.DefaultSort;
-import java.util.List;
-import java.util.Map;
 
 /**
  * Created by tommy on 04/09/17.
@@ -47,26 +42,17 @@ public class SharedElementListFragment extends Fragment implements NatureItemsAd
   @Override public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
     NatureItemsAdapter adapter = new NatureItemsAdapter(DrawableUtils.getAllNatureItems(getContext()));
     adapter.setOnItemClickListener(this);
+
     recyclerView.setHasFixedSize(true);
 
-    setExitSharedElementCallback(new SharedElementCallback() {
-      @Override public void onMapSharedElements(List<String> names, Map<String, View> sharedElements) {
-        super.onMapSharedElements(names, sharedElements);
-      }
-
-      @Override public View onCreateSnapshotView(Context context, Parcelable snapshot) {
-        return super.onCreateSnapshotView(context, snapshot);
-      }
-    });
-
     LinearLayoutManager layoutManager = new GridLayoutManager(getContext(), 2) {
-      @Override public void onLayoutChildren(RecyclerView.Recycler recycler, RecyclerView.State state) {
-        super.onLayoutChildren(recycler, state);
-        if (!startAnimated) {
-          initSpruce();
-          startAnimated = true;
-        }
-      }
+      //@Override public void onLayoutChildren(RecyclerView.Recycler recycler, RecyclerView.State state) {
+      //  super.onLayoutChildren(recycler, state);
+      //  if (!startAnimated) {
+      //    initSpruce();
+      //    startAnimated = true;
+      //  }
+      //}
     };
     recyclerView.setLayoutManager(layoutManager);
     recyclerView.setAdapter(adapter);

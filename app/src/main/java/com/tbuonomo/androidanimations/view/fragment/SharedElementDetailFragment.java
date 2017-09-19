@@ -1,6 +1,5 @@
 package com.tbuonomo.androidanimations.view.fragment;
 
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.Nullable;
@@ -13,8 +12,7 @@ import android.widget.ImageView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.DataSource;
-import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.tbuonomo.androidanimations.R;
@@ -41,6 +39,7 @@ public class SharedElementDetailFragment extends Fragment {
     // Wait for launching enter transition
     postponeEnterTransition();
     setSharedElementEnterTransition(TransitionInflater.from(getContext()).inflateTransition(R.transition.shared_element_trasition));
+    setSharedElementReturnTransition(TransitionInflater.from(getContext()).inflateTransition(R.transition.shared_element_trasition));
   }
 
   @Nullable @Override public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -54,14 +53,14 @@ public class SharedElementDetailFragment extends Fragment {
 
     natureImage.setTransitionName(String.valueOf(resId));
 
-    Glide.with(getContext()).load(resId).listener(new RequestListener<Drawable>() {
-      @Override public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+    Glide.with(getContext()).load(resId).listener(new RequestListener<Integer, GlideDrawable>() {
+      @Override public boolean onException(Exception e, Integer model, Target<GlideDrawable> target, boolean isFirstResource) {
         startPostponedEnterTransition();
         return false;
       }
 
-      @Override
-      public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+      @Override public boolean onResourceReady(GlideDrawable resource, Integer model, Target<GlideDrawable> target, boolean isFromMemoryCache,
+          boolean isFirstResource) {
         startPostponedEnterTransition();
         return false;
       }

@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.tbuonomo.androidanimations.R;
 import com.tbuonomo.androidanimations.view.adapter.item.NatureItem;
 import java.util.List;
@@ -34,7 +35,8 @@ public class NatureItemsAdapter extends RecyclerView.Adapter<NatureItemsAdapter.
   @Override public void onBindViewHolder(ViewHolder holder, int position) {
     int drawableResId = natureItems.get(position).getDrawableResId();
     holder.natureImage.setTransitionName(String.valueOf(drawableResId));
-    Glide.with(context).load(drawableResId).into(holder.natureImage);
+    Glide.with(context).load(drawableResId).diskCacheStrategy(DiskCacheStrategy.SOURCE).into(holder.natureImage);
+
     holder.itemView.setOnClickListener(view -> {
       if (onItemClickListener != null) {
         onItemClickListener.onItemClick(natureItems.get(position), holder.natureImage);
@@ -50,6 +52,10 @@ public class NatureItemsAdapter extends RecyclerView.Adapter<NatureItemsAdapter.
     this.onItemClickListener = onItemClickListener;
   }
 
+  public interface OnItemClickListener {
+    void onItemClick(NatureItem natureItem, View natureView);
+  }
+
   public class ViewHolder extends RecyclerView.ViewHolder {
     @BindView(R.id.item_nature_image) public ImageView natureImage;
 
@@ -57,9 +63,5 @@ public class NatureItemsAdapter extends RecyclerView.Adapter<NatureItemsAdapter.
       super(itemView);
       ButterKnife.bind(this, itemView);
     }
-  }
-
-  public interface OnItemClickListener {
-    void onItemClick(NatureItem natureItem, View natureView);
   }
 }
