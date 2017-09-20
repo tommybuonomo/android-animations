@@ -1,6 +1,5 @@
 package com.tbuonomo.androidanimations.view.fragment;
 
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.Nullable;
@@ -12,12 +11,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.DataSource;
-import com.bumptech.glide.load.engine.GlideException;
-import com.bumptech.glide.request.RequestListener;
-import com.bumptech.glide.request.target.Target;
 import com.tbuonomo.androidanimations.R;
+import com.tbuonomo.androidanimations.config.GlideApp;
+import com.tbuonomo.androidanimations.view.util.DimenUtils;
 
 /**
  * Created by tommy on 04/09/17.
@@ -40,8 +36,9 @@ public class SharedElementDetailFragment extends Fragment {
     super.onCreate(savedInstanceState);
     // Wait for launching enter transition
     postponeEnterTransition();
-    setSharedElementEnterTransition(TransitionInflater.from(getContext()).inflateTransition(R.transition.shared_element_trasition));
-    setSharedElementReturnTransition(TransitionInflater.from(getContext()).inflateTransition(R.transition.shared_element_trasition));
+    setSharedElementEnterTransition(TransitionInflater.from(getContext()).inflateTransition(R.transition.shared_element_transition_right));
+    setSharedElementReturnTransition(TransitionInflater.from(getContext()).inflateTransition(R.transition.shared_element_transition_right));
+    setEnterTransition(TransitionInflater.from(getContext()).inflateTransition(android.R.transition.explode));
   }
 
   @Nullable @Override public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -55,17 +52,9 @@ public class SharedElementDetailFragment extends Fragment {
 
     natureImage.setTransitionName(String.valueOf(resId));
 
-    Glide.with(getContext()).load(resId).listener(new RequestListener<Drawable>() {
-      @Override public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
-        startPostponedEnterTransition();
-        return false;
-      }
-
-      @Override
-      public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
-        startPostponedEnterTransition();
-        return false;
-      }
-    }).into(natureImage);
+    GlideApp.with(getContext())
+        .load(resId)
+        .override((int) DimenUtils.getScreenWidth(getContext()), (int) DimenUtils.toDp(getContext(), 400))
+        .into(natureImage);
   }
 }

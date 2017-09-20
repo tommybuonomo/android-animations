@@ -1,5 +1,4 @@
 apply plugin: 'com.android.application'
-apply plugin: 'com.neenbedankt.android-apt'
 
 android {
   compileSdkVersion 26
@@ -51,8 +50,8 @@ dependencies {
 
   testCompile 'junit:junit:4.12'
 
-  apt 'com.jakewharton:butterknife-compiler:8.2.1'
-  compile 'com.jakewharton:butterknife:8.2.1'
+  annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+  compile 'com.jakewharton:butterknife:8.8.1'
 }
 
 preBuild.dependsOn("checkstyle")

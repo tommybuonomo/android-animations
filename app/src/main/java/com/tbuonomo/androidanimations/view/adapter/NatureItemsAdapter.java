@@ -8,9 +8,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import com.bumptech.glide.Glide;
 import com.tbuonomo.androidanimations.R;
+import com.tbuonomo.androidanimations.config.GlideApp;
 import com.tbuonomo.androidanimations.view.adapter.item.NatureItem;
+import com.tbuonomo.androidanimations.view.util.DimenUtils;
 import java.util.List;
 
 /**
@@ -35,9 +36,11 @@ public class NatureItemsAdapter extends RecyclerView.Adapter<NatureItemsAdapter.
     int drawableResId = natureItems.get(position).getDrawableResId();
     holder.natureImage.setTransitionName(String.valueOf(drawableResId));
 
-    if (holder.natureImage.getTag() == null || Integer.compare(drawableResId, (Integer) holder.natureImage.getTag()) != 0) {
-      Glide.with(context).load(drawableResId).into(holder.natureImage);
-    }
+    // Need to override size to avoid glide to reload drawable on exit shared element transition
+    GlideApp.with(context)
+        .load(drawableResId)
+        .override((int) DimenUtils.getScreenWidth(context), (int) DimenUtils.toDp(context, 400))
+        .into(holder.natureImage);
 
     holder.itemView.setOnClickListener(view -> {
       if (onItemClickListener != null) {

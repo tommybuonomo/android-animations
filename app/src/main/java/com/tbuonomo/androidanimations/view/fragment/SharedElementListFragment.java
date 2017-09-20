@@ -32,7 +32,6 @@ public class SharedElementListFragment extends Fragment implements NatureItemsAd
   @BindView(R.id.shared_element_recycler_view) RecyclerView recyclerView;
   private boolean startAnimated;
   private FragmentNavigation fragmentNavigation;
-  private boolean recyclerViewLoaded;
 
   @Override public void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);

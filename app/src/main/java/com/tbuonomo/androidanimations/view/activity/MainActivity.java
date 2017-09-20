@@ -124,10 +124,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
   @Override public void navigateToNatureDetailFragment(int natureResId, View sharedElement) {
     Fragment currentFragment = fragmentManager.findFragmentById(R.id.fragment_container);
-    currentFragment.setExitTransition(TransitionInflater.from(this).inflateTransition(android.R.transition.no_transition));
+    currentFragment.setExitTransition(TransitionInflater.from(this).inflateTransition(android.R.transition.explode));
 
     SharedElementDetailFragment fragment = SharedElementDetailFragment.newInstance(natureResId);
-    fragment.setEnterTransition(TransitionInflater.from(this).inflateTransition(android.R.transition.no_transition));
+    fragment.setEnterTransition(TransitionInflater.from(this).inflateTransition(android.R.transition.fade));
     fragmentManager.beginTransaction()
         .addSharedElement(sharedElement, ViewCompat.getTransitionName(sharedElement))
         .addToBackStack(SharedElementDetailFragment.class.getSimpleName())
