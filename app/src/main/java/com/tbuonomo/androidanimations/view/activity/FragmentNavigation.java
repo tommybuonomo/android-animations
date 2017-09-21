@@ -7,5 +7,13 @@ import android.view.View;
  */
 
 public interface FragmentNavigation {
+  /**
+   * Navigate to the nature item detail screen using fragment to fragment transition.
+   */
   void navigateToNatureDetailFragment(int natureResId, View sharedElement);
+
+  /**
+   * Navigate to the nature item detail screen using fragment to activity transition.
+   */
+  void navigateToNatureDetailActivity(int natureResId, View sharedElement);
 }

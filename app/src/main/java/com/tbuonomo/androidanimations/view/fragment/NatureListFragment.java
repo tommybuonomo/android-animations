@@ -2,7 +2,6 @@ package com.tbuonomo.androidanimations.view.fragment;
 
 import android.animation.ObjectAnimator;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
@@ -27,7 +26,7 @@ import com.willowtreeapps.spruce.sort.DefaultSort;
  * Created by tommy on 04/09/17.
  */
 
-public class SharedElementListFragment extends Fragment implements NatureItemsAdapter.OnItemClickListener {
+public class NatureListFragment extends Fragment implements NatureItemsAdapter.OnItemClickListener {
 
   @BindView(R.id.shared_element_recycler_view) RecyclerView recyclerView;
   private boolean startAnimated;
@@ -39,7 +38,7 @@ public class SharedElementListFragment extends Fragment implements NatureItemsAd
   }
 
   @Nullable @Override public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-    View rootView = inflater.inflate(R.layout.fragment_shared_element, container, false);
+    View rootView = inflater.inflate(R.layout.fragment_nature_list, container, false);
     ButterKnife.bind(this, rootView);
     fragmentNavigation = (FragmentNavigation) getActivity();
     return rootView;
@@ -60,19 +59,6 @@ public class SharedElementListFragment extends Fragment implements NatureItemsAd
       }
     };
 
-    new Handler().postDelayed(new Runnable() {
-      @Override public void run() {
-        startPostponedEnterTransition();
-      }
-    }, 2000);
-
-    //recyclerView.getViewTreeObserver().addOnGlobalLayoutListener(() -> {
-    //  if (!recyclerViewLoaded) {
-    //    startPostponedEnterTransition();
-    //    recyclerViewLoaded = true;
-    //  }
-    //});
-
     recyclerView.setLayoutManager(layoutManager);
     recyclerView.setAdapter(adapter);
   }
@@ -86,6 +72,6 @@ public class SharedElementListFragment extends Fragment implements NatureItemsAd
   }
 
   @Override public void onItemClick(NatureItem natureItem, View natureView) {
-    fragmentNavigation.navigateToNatureDetailFragment(natureItem.getDrawableResId(), natureView);
+    fragmentNavigation.navigateToNatureDetailActivity(natureItem.getDrawableResId(), natureView);
   }
 }

@@ -1,8 +1,10 @@
 package com.tbuonomo.androidanimations.view.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
@@ -20,8 +22,8 @@ import butterknife.ButterKnife;
 import com.tbuonomo.androidanimations.R;
 import com.tbuonomo.androidanimations.view.fragment.FlingListFragment;
 import com.tbuonomo.androidanimations.view.fragment.InterpolatorsFragment;
-import com.tbuonomo.androidanimations.view.fragment.SharedElementDetailFragment;
-import com.tbuonomo.androidanimations.view.fragment.SharedElementListFragment;
+import com.tbuonomo.androidanimations.view.fragment.NatureDetailFragment;
+import com.tbuonomo.androidanimations.view.fragment.NatureListFragment;
 import com.tbuonomo.androidanimations.view.fragment.SpringDragFragment;
 import com.tbuonomo.androidanimations.view.fragment.WelcomeFragment;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
@@ -106,7 +108,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         replaceFragment(new SpringDragFragment());
         break;
       case R.id.nav_shared_element:
-        replaceFragment(new SharedElementListFragment());
+        replaceFragment(new NatureListFragment());
         break;
       case R.id.nav_fling:
         replaceFragment(new FlingListFragment());
@@ -126,12 +128,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     Fragment currentFragment = fragmentManager.findFragmentById(R.id.fragment_container);
     currentFragment.setExitTransition(TransitionInflater.from(this).inflateTransition(android.R.transition.explode));
 
-    SharedElementDetailFragment fragment = SharedElementDetailFragment.newInstance(natureResId);
+    NatureDetailFragment fragment = NatureDetailFragment.newInstance(natureResId);
     fragment.setEnterTransition(TransitionInflater.from(this).inflateTransition(android.R.transition.fade));
     fragmentManager.beginTransaction()
         .addSharedElement(sharedElement, ViewCompat.getTransitionName(sharedElement))
-        .addToBackStack(SharedElementDetailFragment.class.getSimpleName())
+        .addToBackStack(NatureDetailFragment.class.getSimpleName())
         .replace(R.id.fragment_container, fragment)
         .commit();
+  }
+
+  @Override public void navigateToNatureDetailActivity(int natureResId, View sharedElement) {
+    Intent intent = new Intent(this, NatureDetailActivity.class);
+    intent.putExtra(NatureDetailActivity.NATURE_RES_ID, natureResId);
+
+    ActivityOptionsCompat options =
+        ActivityOptionsCompat.makeSceneTransitionAnimation(this, sharedElement, ViewCompat.getTransitionName(sharedElement));
+    startActivity(intent, options.toBundle());
   }
 }
