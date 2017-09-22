@@ -7,6 +7,9 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.transition.TransitionInflater;
+import android.view.MenuItem;
+import android.view.Window;
 import android.widget.ImageView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -28,11 +31,13 @@ public class NatureDetailActivity extends AppCompatActivity {
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+    getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
+    getWindow().setEnterTransition(TransitionInflater.from(this).inflateTransition(android.R.transition.fade));
     setContentView(R.layout.activity_nature_detail);
     ButterKnife.bind(this);
     getWindow().setStatusBarColor(Color.TRANSPARENT);
     setSupportActionBar(toolbar);
-
+    getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     initNatureImage();
   }
 
@@ -60,6 +65,13 @@ public class NatureDetailActivity extends AppCompatActivity {
           }
         })
         .into(natureImage);
+  }
+
+  @Override public boolean onOptionsItemSelected(MenuItem menuItem) {
+    if (menuItem.getItemId() == android.R.id.home) {
+      onBackPressed();
+    }
+    return super.onOptionsItemSelected(menuItem);
   }
 
   @Override protected void attachBaseContext(Context newBase) {
