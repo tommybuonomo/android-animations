@@ -31,6 +31,7 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, FragmentNavigation {
 
   @BindView(R.id.toolbar) Toolbar toolbar;
+  @BindView(R.id.nav_view) NavigationView navigationView;
   private FragmentManager fragmentManager;
 
   @Override protected void onCreate(Bundle savedInstanceState) {
@@ -57,8 +58,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     drawer.addDrawerListener(toggle);
     toggle.syncState();
 
-    NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
     navigationView.setNavigationItemSelectedListener(this);
+
   }
 
   @Override public void onBackPressed() {
