@@ -19,12 +19,11 @@
     <android.support.design.widget.CollapsingToolbarLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:minHeight="200dp"
         android:fitsSystemWindows="true"
-        app:contentScrim="@color/colorPrimary"
         app:expandedTitleMarginEnd="64dp"
         app:expandedTitleMarginStart="48dp"
         app:layout_scrollFlags="scroll|exitUntilCollapsed"
+        app:statusBarScrim="@android:color/transparent"
         >
 
       <ImageView
@@ -41,11 +40,9 @@
       <android.support.v7.widget.Toolbar
           android:id="@+id/nature_toolbar"
           android:layout_width="match_parent"
-          android:layout_height="?attr/actionBarSize"
+          android:layout_height="180dp"
           app:layout_collapseMode="pin"
           app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-          app:titleTextColor="@android:color/white"
-
           />
 
     </android.support.design.widget.CollapsingToolbarLayout>
@@ -53,8 +50,10 @@
   </android.support.design.widget.AppBarLayout>
 
   <android.support.v4.widget.NestedScrollView
+      android:id="@+id/nature_nested_scroll_view"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
+      android:background="@color/cardview_dark_background"
       app:layout_behavior="@string/appbar_scrolling_view_behavior"
       >
 
@@ -87,10 +86,11 @@
   </android.support.v4.widget.NestedScrollView>
 
   <android.support.design.widget.FloatingActionButton
+      android:id="@+id/nature_floating_button"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_margin="@dimen/activity_horizontal_margin"
-      android:src="@drawable/social_019"
+      android:src="@drawable/play_icon"
       app:layout_anchor="@id/nature_app_bar"
       app:layout_anchorGravity="bottom|right|end"
       />

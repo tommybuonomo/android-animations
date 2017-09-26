@@ -1,11 +1,16 @@
 package com.tbuonomo.androidanimations.view.activity;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.graphics.Palette;
 import android.support.v7.widget.Toolbar;
 import android.transition.TransitionInflater;
 import android.view.MenuItem;
@@ -26,6 +31,8 @@ public class NatureDetailActivity extends AppCompatActivity {
   public static final String NATURE_RES_ID = "NATURE_RES_ID";
 
   @BindView(R.id.nature_toolbar) Toolbar toolbar;
+  @BindView(R.id.nature_floating_button) FloatingActionButton floatingActionButton;
+  @BindView(R.id.nature_nested_scroll_view) NestedScrollView nestedScrollView;
 
   @BindView(R.id.item_nature_image) ImageView natureImage;
 
@@ -35,10 +42,15 @@ public class NatureDetailActivity extends AppCompatActivity {
     getWindow().setEnterTransition(TransitionInflater.from(this).inflateTransition(android.R.transition.fade));
     setContentView(R.layout.activity_nature_detail);
     ButterKnife.bind(this);
+    setUpToolbar();
+    initNatureImage();
+  }
+
+  private void setUpToolbar() {
     getWindow().setStatusBarColor(Color.TRANSPARENT);
     setSupportActionBar(toolbar);
     getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-    initNatureImage();
+    getSupportActionBar().setTitle("");
   }
 
   private void initNatureImage() {
@@ -60,11 +72,23 @@ public class NatureDetailActivity extends AppCompatActivity {
 
           @Override
           public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+            createPaletteAsync(resource);
             startPostponedEnterTransition();
             return false;
           }
         })
         .into(natureImage);
+  }
+
+  public void createPaletteAsync(Drawable drawable) {
+    if (drawable instanceof BitmapDrawable) {
+      Palette.from(((BitmapDrawable) drawable).getBitmap()).generate(p -> {
+        int floatingColor = p.getLightVibrantColor(p.getDominantColor(getColor(R.color.colorAccent)));
+        int backgroundColor = p.getVibrantColor(p.getMutedColor(getColor(R.color.colorPrimaryDark)));
+        floatingActionButton.setBackgroundTintList(ColorStateList.valueOf(floatingColor));
+        nestedScrollView.setBackgroundColor(backgroundColor);
+      });
+    }
   }
 
   @Override public boolean onOptionsItemSelected(MenuItem menuItem) {
