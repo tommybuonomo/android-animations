@@ -1,7 +1,9 @@
 package com.tbuonomo.androidanimations.view.activity;
 
+import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityOptionsCompat;
@@ -17,8 +19,11 @@ import android.transition.TransitionInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.LinearInterpolator;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import com.airbnb.lottie.LottieAnimationView;
+import com.airbnb.lottie.SimpleColorFilter;
 import com.tbuonomo.androidanimations.R;
 import com.tbuonomo.androidanimations.view.fragment.FlingListFragment;
 import com.tbuonomo.androidanimations.view.fragment.InterpolatorsFragment;
@@ -52,7 +57,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
   }
 
   private void initDrawer() {
-    DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+    DrawerLayout drawer = findViewById(R.id.drawer_layout);
     ActionBarDrawerToggle toggle =
         new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
     drawer.addDrawerListener(toggle);
@@ -60,6 +65,35 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     navigationView.setNavigationItemSelectedListener(this);
 
+    View welcomeNavigation = navigationView.getMenu().findItem(R.id.nav_welcome).getActionView();
+
+
+    LottieAnimationView waveLottieView = navigationView.getHeaderView(0).findViewById(R.id.header_lottie_wave);
+    waveLottieView.addColorFilter(new SimpleColorFilter(getColor(R.color.colorAccent)));
+    waveLottieView.addColorFilterToLayer("background", new SimpleColorFilter(Color.WHITE));
+    waveLottieView.setMaxProgress(0.33f);
+
+    drawer.addDrawerListener(new DrawerLayout.SimpleDrawerListener() {
+
+      private ValueAnimator animator;
+
+      @Override public void onDrawerSlide(View drawerView, float slideOffset) {
+        // Header Lottie Animation
+        if (slideOffset > 0 && (animator == null || !animator.isRunning())) {
+          // Custom animation duration.
+          animator = ValueAnimator.ofFloat(0f, 0.33f).setDuration(20000);
+          animator.setRepeatCount(ValueAnimator.INFINITE);
+          animator.setInterpolator(new LinearInterpolator());
+
+          animator.addUpdateListener(animation -> {
+            waveLottieView.setProgress((Float) animation.getAnimatedValue());
+          });
+          animator.start();
+        } else if (slideOffset == 0) {
+          animator.cancel();
+        }
+      }
+    });
   }
 
   @Override public void onBackPressed() {
@@ -73,7 +107,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
   @Override public boolean onCreateOptionsMenu(Menu menu) {
     // Inflate the menu; this adds items to the action bar if it is present.
-    getMenuInflater().inflate(R.menu.main, menu);
     return true;
   }
 
