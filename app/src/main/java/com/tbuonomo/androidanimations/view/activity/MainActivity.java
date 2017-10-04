@@ -19,6 +19,8 @@ import android.transition.TransitionInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.LinearInterpolator;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -31,6 +33,7 @@ import com.tbuonomo.androidanimations.view.fragment.NatureDetailFragment;
 import com.tbuonomo.androidanimations.view.fragment.NatureListFragment;
 import com.tbuonomo.androidanimations.view.fragment.SpringDragFragment;
 import com.tbuonomo.androidanimations.view.fragment.WelcomeFragment;
+import com.tbuonomo.androidanimations.view.util.DimenUtils;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, FragmentNavigation {
@@ -38,6 +41,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
   @BindView(R.id.toolbar) Toolbar toolbar;
   @BindView(R.id.nav_view) NavigationView navigationView;
   private FragmentManager fragmentManager;
+  private ValueAnimator subMenuViewAnimator;
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -65,8 +69,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     navigationView.setNavigationItemSelectedListener(this);
 
-    View welcomeNavigation = navigationView.getMenu().findItem(R.id.nav_welcome).getActionView();
-
+    navigationView.post(() -> {
+      ViewGroup navigationViewGroup = (ViewGroup) navigationView.getChildAt(0);
+      subMenuViewAnimator = ValueAnimator.ofFloat(DimenUtils.toDp(MainActivity.this, 300), 0);
+      subMenuViewAnimator.setDuration(1000);
+      subMenuViewAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
+      subMenuViewAnimator.addUpdateListener(valueAnimator -> {
+        for (int i = 1; i < navigationViewGroup.getChildCount(); i++) {
+          navigationViewGroup.getChildAt(i).setTranslationX((Float) valueAnimator.getAnimatedValue());
+        }
+      });
+    });
 
     LottieAnimationView waveLottieView = navigationView.getHeaderView(0).findViewById(R.id.header_lottie_wave);
     waveLottieView.addColorFilter(new SimpleColorFilter(getColor(R.color.colorAccent)));
@@ -74,7 +87,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     waveLottieView.setMaxProgress(0.33f);
 
     drawer.addDrawerListener(new DrawerLayout.SimpleDrawerListener() {
-
       private ValueAnimator animator;
 
       @Override public void onDrawerSlide(View drawerView, float slideOffset) {
@@ -91,6 +103,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           animator.start();
         } else if (slideOffset == 0) {
           animator.cancel();
+        }
+
+        if (subMenuViewAnimator != null) {
+          subMenuViewAnimator.setCurrentPlayTime((long) (slideOffset * (float) subMenuViewAnimator.getDuration()));
         }
       }
     });
