@@ -47,9 +47,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
     ButterKnife.bind(this);
-
     setSupportActionBar(toolbar);
-
     initDrawer();
     initFragmentManager();
   }
@@ -149,6 +147,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     int id = item.getItemId();
 
     switch (id) {
+      case R.id.nav_welcome:
+        replaceFragment(new WelcomeFragment());
+        break;
       case R.id.nav_view_animation:
         break;
       case R.id.nav_interpolator:

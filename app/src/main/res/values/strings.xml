@@ -15,8 +15,10 @@
   <string name="property_animations">Property Animations</string>
   <string name="physics_based_animations">Physics-based Animations</string>
   <string name="transitions_animations">Transition Animations</string>
+  <string name="static_animations">Static Animations</string>
   <string name="fling_list_animation">Fling List Animation</string>
   <string name="shared_element_animation">Shared Element Animation</string>
+  <string name="lottie_animation">Lottie Animation</string>
   <string name="spring_animation">Spring Animation</string>
 
   <!--Interpolators-->

@@ -5,14 +5,16 @@
   <group android:checkableBehavior="single">
     <item
         android:id="@+id/nav_welcome"
-        android:title="Welcome"/>
+        android:icon="@drawable/welcome"
+        android:title="Welcome"
+        />
   </group>
 
   <item android:title="View Animation">
     <menu>
       <item
           android:id="@+id/nav_view_animation"
-          android:icon="@drawable/ic_menu_camera"
+          android:icon="@drawable/transition"
           android:title="View Animation"/>
     </menu>
   </item>
@@ -21,7 +23,7 @@
     <menu>
       <item
           android:id="@+id/nav_interpolator"
-          android:icon="@drawable/ic_menu_share"
+          android:icon="@drawable/parabolic"
           android:title="@string/interpolators"/>
 
     </menu>
@@ -32,11 +34,11 @@
     <menu>
       <item
           android:id="@+id/nav_spring"
-          android:icon="@drawable/ic_menu_share"
+          android:icon="@drawable/atomic"
           android:title="@string/spring_animation"/>
       <item
           android:id="@+id/nav_fling"
-          android:icon="@drawable/ic_menu_share"
+          android:icon="@drawable/scroll"
           android:title="@string/fling_list_animation"/>
     </menu>
 
@@ -47,8 +49,17 @@
     <menu>
       <item
           android:id="@+id/nav_shared_element"
-          android:icon="@drawable/ic_menu_share"
+          android:icon="@drawable/transition"
           android:title="@string/shared_element_animation"/>
+    </menu>
+  </item>
+
+  <item android:title="@string/static_animations">
+    <menu>
+      <item
+          android:id="@+id/nav_lottie"
+          android:icon="@drawable/transition"
+          android:title="@string/lottie_animation"/>
     </menu>
   </item>
 
