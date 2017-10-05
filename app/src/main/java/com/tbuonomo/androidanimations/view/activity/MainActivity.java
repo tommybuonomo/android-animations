@@ -20,7 +20,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AccelerateDecelerateInterpolator;
+import android.view.animation.DecelerateInterpolator;
 import android.view.animation.LinearInterpolator;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -29,6 +29,7 @@ import com.airbnb.lottie.SimpleColorFilter;
 import com.tbuonomo.androidanimations.R;
 import com.tbuonomo.androidanimations.view.fragment.FlingListFragment;
 import com.tbuonomo.androidanimations.view.fragment.InterpolatorsFragment;
+import com.tbuonomo.androidanimations.view.fragment.LottieFragment;
 import com.tbuonomo.androidanimations.view.fragment.NatureDetailFragment;
 import com.tbuonomo.androidanimations.view.fragment.NatureListFragment;
 import com.tbuonomo.androidanimations.view.fragment.SpringDragFragment;
@@ -69,12 +70,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     navigationView.post(() -> {
       ViewGroup navigationViewGroup = (ViewGroup) navigationView.getChildAt(0);
-      subMenuViewAnimator = ValueAnimator.ofFloat(DimenUtils.toDp(MainActivity.this, 300), 0);
+      subMenuViewAnimator = ValueAnimator.ofFloat(DimenUtils.toDp(MainActivity.this, 78), 0);
       subMenuViewAnimator.setDuration(1000);
-      subMenuViewAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
+      subMenuViewAnimator.setInterpolator(new DecelerateInterpolator());
       subMenuViewAnimator.addUpdateListener(valueAnimator -> {
         for (int i = 1; i < navigationViewGroup.getChildCount(); i++) {
-          navigationViewGroup.getChildAt(i).setTranslationX((Float) valueAnimator.getAnimatedValue());
+          navigationViewGroup.getChildAt(i).setTranslationY((Float) valueAnimator.getAnimatedValue());
         }
       });
     });
@@ -163,6 +164,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         break;
       case R.id.nav_fling:
         replaceFragment(new FlingListFragment());
+        break;
+      case R.id.nav_lottie:
+        replaceFragment(new LottieFragment());
         break;
     }
 

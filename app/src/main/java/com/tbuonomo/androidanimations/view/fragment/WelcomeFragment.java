@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -63,8 +62,6 @@ public class WelcomeFragment extends Fragment {
     translateAnimator.setDuration(2000);
 
     translateAnimator.addUpdateListener(valueAnimator -> {
-      float value = (Float) valueAnimator.getAnimatedValue();
-      Log.i(WelcomeFragment.class.getSimpleName(), "setUpCenterCardViewAnimation: " + value);
       for (WelcomeItemWrapper welcomeItemWrapper : welcomeItems) {
         welcomeItemWrapper.updateFinalPosition(welcomeCardView.getTranslationX() + welcomeCardView.getWidth() / 2,
             welcomeCardView.getTranslationY() + welcomeCardView.getHeight() / 2);
@@ -75,7 +72,7 @@ public class WelcomeFragment extends Fragment {
       @Override public void onAnimationEnd(Animator animation) {
         super.onAnimationEnd(animation);
         firstAnimationFinished = true;
-        WelcomeItemWrapper welcomeItem = new WelcomeItemWrapper(welcomeCardView, 0.5f);
+        WelcomeItemWrapper welcomeItem = new WelcomeItemWrapper(welcomeCardView, 2);
         welcomeItems.add(welcomeItem);
         Stream.of(welcomeItems).forEach(WelcomeItemWrapper::resetFinalPosition);
       }

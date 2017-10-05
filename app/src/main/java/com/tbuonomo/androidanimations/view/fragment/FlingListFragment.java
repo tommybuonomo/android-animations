@@ -87,6 +87,11 @@ public class FlingListFragment extends Fragment {
           viewGroup.getChildAt(i).setRotation(value);
         }
       }
+
+      @Override public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
+        Log.i(FlingListFragment.class.getSimpleName(), "onScroll: " + distanceX + " " + distanceY);
+        return super.onScroll(e1, e2, distanceX, distanceY);
+      }
     };
 
     springAnimation = new SpringAnimation(linearLayout, floatPropertyCompat);
@@ -108,8 +113,12 @@ public class FlingListFragment extends Fragment {
 
       @Override public void onStopTrackingTouch(SeekBar seekBar) {
 
+<<<<<<< Updated upstream
       }
     });
+=======
+    scrollView.setOnTouchListener((view1, motionEvent) -> gestureDetector.onTouchEvent(motionEvent));
+>>>>>>> Stashed changes
 
     dampingRationSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
       @Override public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {

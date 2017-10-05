@@ -12,7 +12,7 @@
 
   <item android:title="View Animation">
     <menu>
-      <item
+      <item android:checkable="true"
           android:id="@+id/nav_view_animation"
           android:icon="@drawable/transition"
           android:title="View Animation"/>
@@ -22,6 +22,7 @@
   <item android:title="@string/property_animations">
     <menu>
       <item
+          android:checkable="true"
           android:id="@+id/nav_interpolator"
           android:icon="@drawable/parabolic"
           android:title="@string/interpolators"/>
@@ -33,10 +34,12 @@
   <item android:title="@string/physics_based_animations">
     <menu>
       <item
+          android:checkable="true"
           android:id="@+id/nav_spring"
           android:icon="@drawable/atomic"
           android:title="@string/spring_animation"/>
       <item
+          android:checkable="true"
           android:id="@+id/nav_fling"
           android:icon="@drawable/scroll"
           android:title="@string/fling_list_animation"/>
@@ -48,6 +51,7 @@
   <item android:title="@string/transitions_animations">
     <menu>
       <item
+          android:checkable="true"
           android:id="@+id/nav_shared_element"
           android:icon="@drawable/transition"
           android:title="@string/shared_element_animation"/>
@@ -57,6 +61,7 @@
   <item android:title="@string/static_animations">
     <menu>
       <item
+          android:checkable="true"
           android:id="@+id/nav_lottie"
           android:icon="@drawable/transition"
           android:title="@string/lottie_animation"/>

@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ECEFF1"
+    android:background="@color/md_teal_50"
     android:orientation="vertical"
     >
 
@@ -17,9 +17,9 @@
       android:id="@+id/welcome_center_card_view"
       android:layout_width="150dp"
       android:layout_height="150dp"
-      app:cardBackgroundColor="@color/colorPrimaryDark"
+      android:alpha="0.9"
+      app:cardBackgroundColor="@color/colorAccent"
       app:cardCornerRadius="75dp"
-      android:alpha="0.8"
       app:cardElevation="16dp"
       app:contentPadding="24dp"
       >
