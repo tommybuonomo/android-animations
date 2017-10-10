@@ -63,7 +63,7 @@
       <item
           android:checkable="true"
           android:id="@+id/nav_lottie"
-          android:icon="@drawable/transition"
+          android:icon="@drawable/ic_lottie"
           android:title="@string/lottie_animation"/>
     </menu>
   </item>

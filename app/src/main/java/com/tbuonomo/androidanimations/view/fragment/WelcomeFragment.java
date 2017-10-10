@@ -72,7 +72,7 @@ public class WelcomeFragment extends Fragment {
       @Override public void onAnimationEnd(Animator animation) {
         super.onAnimationEnd(animation);
         firstAnimationFinished = true;
-        WelcomeItemWrapper welcomeItem = new WelcomeItemWrapper(welcomeCardView, 2);
+        WelcomeItemWrapper welcomeItem = new WelcomeItemWrapper(welcomeCardView, 0.8f);
         welcomeItems.add(welcomeItem);
         Stream.of(welcomeItems).forEach(WelcomeItemWrapper::resetFinalPosition);
       }
