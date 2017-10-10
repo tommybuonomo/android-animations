@@ -44,4 +44,8 @@ Aenean at eros tincidunt, dignissim sem id, fringilla odio. Mauris non felis ex.
 Etiam non metus vehicula, facilisis nisl id, vehicula dolor. Vivamus sed viverra arcu. Integer congue enim a magna placerat tempor. Nullam dictum sem non molestie scelerisque. Nunc congue imperdiet erat, vitae euismod mauris pharetra non. Curabitur id ante ultricies, dignissim orci pretium, varius nisi. Nulla eu augue et mi sodales egestas non blandit dolor. Nulla tellus ipsum, cursus sed odio vel, pretium cursus ligula. Sed eu efficitur lectus. Pellentesque vitae nisi mollis, convallis metus eleifend, tincidunt tortor.</string>
   <string name="property_animation">Property Animation</string>
   <string name="android_animation">Android Animation</string>
+    <string name="position">Position</string>
+  <string name="rotation">Rotation</string>
+    <string name="size">Size</string>
+  <string name="alpha">alpha</string>
 </resources>

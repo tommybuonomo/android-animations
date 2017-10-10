@@ -13,7 +13,7 @@
   <item android:title="@string/android_animation">
     <menu>
       <item android:checkable="true"
-          android:id="@+id/nav_view_animation"
+          android:id="@+id/nav_property_animation"
           android:icon="@drawable/transition"
           android:title="@string/property_animation"/>
     </menu>

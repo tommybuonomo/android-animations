@@ -50,6 +50,7 @@ public class FlingListFragment extends Fragment {
   private float flingFriction = MIN_FRICTION;
   private SpringForce springForce;
   private SpringAnimation springAnimation;
+  private FlingAnimation flingAnimation;
 
   @Nullable @Override public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
     View rootView = inflater.inflate(R.layout.fragment_fling_list, container, false);
@@ -146,12 +147,18 @@ public class FlingListFragment extends Fragment {
   }
 
   private void setUpFlingAnimation() {
+    flingAnimation = new FlingAnimation(scrollView, DynamicAnimation.SCROLL_X);
     GestureDetector.OnGestureListener gestureListener = new GestureDetector.SimpleOnGestureListener() {
       @Override public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
         Log.i(FlingListFragment.class.getSimpleName(), "onFling: " + velocityX);
 
-        FlingAnimation flingAnimation = new FlingAnimation(scrollView, DynamicAnimation.SCROLL_X);
-        flingAnimation.setStartVelocity(-velocityX).setMinValue(0).setMaxValue(100000).setFriction(flingFriction).start();
+        flingAnimation.cancel();
+        flingAnimation
+                .setStartVelocity(-velocityX)
+                .setMinValue(0)
+                .setMaxValue(100000)
+                .setFriction(flingFriction)
+                .start();
 
         springForce.setFinalPosition(0);
 
