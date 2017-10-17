@@ -5,10 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    app:cardCornerRadius="4dp"
-    app:cardElevation="4dp"
+    app:cardCornerRadius="2dp"
+    app:cardElevation="2dp"
     app:cardUseCompatPadding="true"
-    tools:alpha="1"
     >
 
   <LinearLayout
@@ -17,7 +16,7 @@
       android:orientation="vertical"
       >
 
-    <ImageView
+    <com.gjiazhe.scrollparallaximageview.ScrollParallaxImageView
         android:id="@+id/item_nature_image"
         android:layout_width="match_parent"
         android:layout_height="150dp"

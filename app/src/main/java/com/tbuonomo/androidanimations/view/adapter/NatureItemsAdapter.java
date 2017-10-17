@@ -5,9 +5,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import com.gjiazhe.scrollparallaximageview.ScrollParallaxImageView;
+import com.gjiazhe.scrollparallaximageview.parallaxstyle.VerticalMovingStyle;
 import com.tbuonomo.androidanimations.R;
 import com.tbuonomo.androidanimations.config.GlideApp;
 import com.tbuonomo.androidanimations.view.adapter.item.NatureItem;
@@ -42,6 +43,8 @@ public class NatureItemsAdapter extends RecyclerView.Adapter<NatureItemsAdapter.
         .override((int) DimenUtils.getScreenWidth(context), (int) DimenUtils.toDp(context, 400))
         .into(holder.natureImage);
 
+    holder.natureImage.setParallaxStyles(new VerticalMovingStyle());
+
     holder.itemView.setOnClickListener(view -> {
       if (onItemClickListener != null) {
         onItemClickListener.onItemClick(natureItems.get(position), holder.natureImage);
@@ -62,7 +65,7 @@ public class NatureItemsAdapter extends RecyclerView.Adapter<NatureItemsAdapter.
   }
 
   public class ViewHolder extends RecyclerView.ViewHolder {
-    @BindView(R.id.item_nature_image) public ImageView natureImage;
+    @BindView(R.id.item_nature_image) public ScrollParallaxImageView natureImage;
 
     public ViewHolder(View itemView) {
       super(itemView);
