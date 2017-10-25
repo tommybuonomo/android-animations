@@ -15,17 +15,17 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.transition.Explode;
 import android.transition.TransitionInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.LinearInterpolator;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
-
 import com.airbnb.lottie.LottieAnimationView;
 import com.airbnb.lottie.SimpleColorFilter;
 import com.tbuonomo.androidanimations.R;
@@ -38,21 +38,20 @@ import com.tbuonomo.androidanimations.view.fragment.PropertyAnimationFragment;
 import com.tbuonomo.androidanimations.view.fragment.SpringDragFragment;
 import com.tbuonomo.androidanimations.view.fragment.WelcomeFragment;
 import com.tbuonomo.androidanimations.view.util.DimenUtils;
-
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, FragmentNavigation {
 
-  @BindView(R.id.toolbar)
-  Toolbar toolbar;
-  @BindView(R.id.nav_view)
-  NavigationView navigationView;
+  @BindView(R.id.toolbar) Toolbar toolbar;
+  @BindView(R.id.nav_view) NavigationView navigationView;
   private FragmentManager fragmentManager;
   private ValueAnimator subMenuViewAnimator;
 
-  @Override
-  protected void onCreate(Bundle savedInstanceState) {
+  @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+    getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
+    getWindow().setEnterTransition(new Explode());
+    getWindow().setExitTransition(new Explode());
     setContentView(R.layout.activity_main);
     ButterKnife.bind(this);
     setSupportActionBar(toolbar);
@@ -69,7 +68,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
   private void initDrawer() {
     DrawerLayout drawer = findViewById(R.id.drawer_layout);
     ActionBarDrawerToggle toggle =
-            new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
     drawer.addDrawerListener(toggle);
     toggle.syncState();
 
@@ -95,8 +94,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     drawer.addDrawerListener(new DrawerLayout.SimpleDrawerListener() {
       private ValueAnimator animator;
 
-      @Override
-      public void onDrawerSlide(View drawerView, float slideOffset) {
+      @Override public void onDrawerSlide(View drawerView, float slideOffset) {
         // Header Lottie Animation
         if (slideOffset > 0 && (animator == null || !animator.isRunning())) {
           // Custom animation duration.
@@ -119,8 +117,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     });
   }
 
-  @Override
-  public void onBackPressed() {
+  @Override public void onBackPressed() {
     DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
     if (drawer.isDrawerOpen(GravityCompat.START)) {
       drawer.closeDrawer(GravityCompat.START);
@@ -129,14 +126,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
   }
 
-  @Override
-  public boolean onCreateOptionsMenu(Menu menu) {
+  @Override public boolean onCreateOptionsMenu(Menu menu) {
     // Inflate the menu; this adds items to the action bar if it is present.
     return true;
   }
 
-  @Override
-  public boolean onOptionsItemSelected(MenuItem item) {
+  @Override public boolean onOptionsItemSelected(MenuItem item) {
     // Handle action bar item clicks here. The action bar will
     // automatically handle clicks on the Home/Up button, so long
     // as you specify a parent activity in AndroidManifest.xml.
@@ -154,9 +149,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     fragmentManager.beginTransaction().replace(R.id.fragment_container, fragment).commit();
   }
 
-  @SuppressWarnings("StatementWithEmptyBody")
-  @Override
-  public boolean onNavigationItemSelected(MenuItem item) {
+  @SuppressWarnings("StatementWithEmptyBody") @Override public boolean onNavigationItemSelected(MenuItem item) {
     // Handle navigation view item clicks here.
     int id = item.getItemId();
 
@@ -189,32 +182,29 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     return true;
   }
 
-  @Override
-  protected void attachBaseContext(Context newBase) {
+  @Override protected void attachBaseContext(Context newBase) {
     super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
   }
 
-  @Override
-  public void navigateToNatureDetailFragment(int natureResId, View sharedElement) {
+  @Override public void navigateToNatureDetailFragment(int natureResId, View sharedElement) {
     Fragment currentFragment = fragmentManager.findFragmentById(R.id.fragment_container);
     currentFragment.setExitTransition(TransitionInflater.from(this).inflateTransition(android.R.transition.explode));
 
     NatureDetailFragment fragment = NatureDetailFragment.newInstance(natureResId);
     fragment.setEnterTransition(TransitionInflater.from(this).inflateTransition(android.R.transition.fade));
     fragmentManager.beginTransaction()
-            .addSharedElement(sharedElement, ViewCompat.getTransitionName(sharedElement))
-            .addToBackStack(NatureDetailFragment.class.getSimpleName())
-            .replace(R.id.fragment_container, fragment)
-            .commit();
+        .addSharedElement(sharedElement, ViewCompat.getTransitionName(sharedElement))
+        .addToBackStack(NatureDetailFragment.class.getSimpleName())
+        .replace(R.id.fragment_container, fragment)
+        .commit();
   }
 
-  @Override
-  public void navigateToNatureDetailActivity(int natureResId, View sharedElement) {
+  @Override public void navigateToNatureDetailActivity(int natureResId, View sharedElement) {
     Intent intent = new Intent(this, NatureDetailActivity.class);
     intent.putExtra(NatureDetailActivity.NATURE_RES_ID, natureResId);
 
     ActivityOptionsCompat options =
-            ActivityOptionsCompat.makeSceneTransitionAnimation(this, sharedElement, ViewCompat.getTransitionName(sharedElement));
+        ActivityOptionsCompat.makeSceneTransitionAnimation(this, sharedElement, ViewCompat.getTransitionName(sharedElement));
     startActivity(intent, options.toBundle());
   }
 }

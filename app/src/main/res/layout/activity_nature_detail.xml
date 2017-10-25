@@ -12,6 +12,7 @@
       android:id="@+id/nature_app_bar"
       android:layout_width="match_parent"
       android:layout_height="400dp"
+      android:backgroundTint="@android:color/transparent"
       android:fitsSystemWindows="true"
       android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
       >
@@ -24,6 +25,7 @@
         app:expandedTitleMarginStart="48dp"
         app:layout_scrollFlags="scroll|exitUntilCollapsed"
         app:statusBarScrim="@android:color/transparent"
+        tools:visibility="gone"
         >
 
       <ImageView
