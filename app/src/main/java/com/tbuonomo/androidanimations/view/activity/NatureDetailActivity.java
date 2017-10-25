@@ -19,13 +19,14 @@ import android.transition.TransitionInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
-import android.widget.ImageView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
+import com.gjiazhe.scrollparallaximageview.ScrollParallaxImageView;
+import com.gjiazhe.scrollparallaximageview.parallaxstyle.VerticalMovingStyle;
 import com.tbuonomo.androidanimations.R;
 import com.tbuonomo.androidanimations.config.GlideApp;
 import com.tbuonomo.androidanimations.view.util.DimenUtils;
@@ -40,7 +41,8 @@ public class NatureDetailActivity extends AppCompatActivity {
   @BindView(R.id.nature_nested_scroll_view) NestedScrollView nestedScrollView;
   @BindView(R.id.nature_app_bar) AppBarLayout appBarLayout;
 
-  @BindView(R.id.item_nature_image) ImageView natureImage;
+  @BindView(R.id.item_nature_image) ScrollParallaxImageView natureImage;
+  private VerticalMovingStyle natureParallaxStyle;
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -52,6 +54,9 @@ public class NatureDetailActivity extends AppCompatActivity {
     setContentView(R.layout.activity_nature_detail);
 
     ButterKnife.bind(this);
+    floatingActionButton.hide();
+    natureParallaxStyle = new VerticalMovingStyle();
+    natureImage.setParallaxStyles(natureParallaxStyle);
 
     setUpToolbar();
     initNatureImage();
@@ -69,6 +74,7 @@ public class NatureDetailActivity extends AppCompatActivity {
     postponeEnterTransition();
 
     int resId = getIntent().getIntExtra(NATURE_RES_ID, 0);
+
     natureImage.setTransitionName(String.valueOf(resId));
 
     getWindow().getSharedElementEnterTransition().addListener(new TransitionListenerAdapter() {
@@ -98,7 +104,6 @@ public class NatureDetailActivity extends AppCompatActivity {
   }
 
   private void startAnimations() {
-    floatingActionButton.setVisibility(View.VISIBLE);
     floatingActionButton.show();
   }
 

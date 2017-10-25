@@ -28,7 +28,7 @@
         tools:visibility="gone"
         >
 
-      <ImageView
+      <com.gjiazhe.scrollparallaximageview.ScrollParallaxImageView
           android:id="@+id/item_nature_image"
           android:layout_width="match_parent"
           android:layout_height="400dp"

@@ -7,7 +7,6 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -64,14 +63,12 @@ public class NatureListFragment extends Fragment implements NatureItemsAdapter.O
     recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
       @Override public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
         super.onScrolled(recyclerView, dx, dy);
-        Log.i(NatureListFragment.class.getSimpleName(), "onScrolled: " + dx + " " + dy);
         int firstVisible = layoutManager.findFirstVisibleItemPosition();
         int lastVisible = layoutManager.findLastVisibleItemPosition();
         for (int i = firstVisible; i <= lastVisible; i++) {
           RecyclerView.ViewHolder viewHolder = recyclerView.findViewHolderForLayoutPosition(firstVisible);
           if (viewHolder instanceof NatureItemsAdapter.ViewHolder) {
             NatureItemsAdapter.ViewHolder natureViewHolder = (NatureItemsAdapter.ViewHolder) viewHolder;
-
           }
         }
       }
